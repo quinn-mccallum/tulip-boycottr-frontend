@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import MapContainer from "./components/MapContainer";
-import logo from "./logo.svg";
-import "./App.css";
+import MapContainer from "./MapContainer";
+import logo from "../logo.svg";
+import "../App.css";
 
 class App extends Component {
   componentDidMount() {
