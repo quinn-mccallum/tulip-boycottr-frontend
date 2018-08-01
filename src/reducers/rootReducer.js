@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { boycottLocations } from './boycottReducer';
-//import { pokemonReducer } from './pokemon.reducer';
-
+import { googleMapsReducer } from './googleMapsReducer';
 
 export const rootReducer = combineReducers({
-    boycottLocations
-  });
+    boycottLocations,
+    googleMaps: googleMapsReducer,
+});

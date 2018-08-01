@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 import { connect } from 'react-redux';
 import { loadBoycotts } from '../actions/boycottActions'
+import { fetchUserLocationInformation } from '../actions/googleMapsActions';
 
 const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 
@@ -18,16 +19,25 @@ const MarkerList = ({ markerData }) => {
 }
 
 const mapStateToProps = (state) => {
-  return {markerData: state.boycottLocations}
+  return {
+    markerData: state.boycottLocations,
+    userLat: state.googleMaps.userLat,
+    userLng: state.googleMaps.userLng,
+    isLoading: state.googleMaps.isLoading,
+    error: state.googleMaps.error,
+  }
+
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {loadMarkers: () => {
-    return dispatch(loadBoycotts)
-  }}
+  return {
+    loadMarkers: () => { return dispatch(loadBoycotts) },
+    fetchUserLocation: () => dispatch(fetchUserLocationInformation),
+  }
+
 }
 
-export class BoycottMap extends Component {
+export class GoogleMapsComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -39,30 +49,36 @@ export class BoycottMap extends Component {
 
   componentDidMount() {
    this.props.loadMarkers();
+   this.props.fetchUserLocation();
   }
 
-
-
+  
   render() {
+    const { isLoading, userLat, userLng } = this.props;
     return (
-      <Map
+       isLoading
+        ? <p>Loading</p>
+        : <Map 
         google = {this.props.google}
         zoom = {10}
-        center = {
+        initialCenter = {
           {
-            lat: this.state.userLat,
-            lng: this.state.userLng
+            lat: userLat,
+            lng: userLng
           }
         }
       >
-      {MarkerList({markerData: this.props.markerData})}
-      </Map>
+        {MarkerList({markerData: this.props.markerData})}
+      </Map> 
     );
   }
 }
 
-const MapContainer = connect(mapStateToProps, mapDispatchToProps)(BoycottMap);
+const GoogleMapsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GoogleMapsComponent);
 
 export default GoogleApiWrapper({
   apiKey: REACT_APP_GOOGLE_MAPS_API_KEY
-})(MapContainer)
+})(GoogleMapsContainer)

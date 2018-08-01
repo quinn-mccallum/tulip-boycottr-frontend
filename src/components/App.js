@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import MapContainer from "./MapContainer";
+import GoogleMapsComponent from "./MapContainer";
 import logo from "../logo.svg";
 import "../App.css";
 
@@ -20,7 +20,7 @@ class App extends Component {
         </header>
         <div className="App-intro">
           <div className="map-container">
-              <MapContainer
+              <GoogleMapsComponent
                 className="map" 
               />
           </div>
