@@ -60,6 +60,7 @@ export class GoogleMapsComponent extends Component {
         ? <p>Loading</p>
         : <Map 
         google = {this.props.google}
+        className = "map"
         zoom = {10}
         initialCenter = {
           {
