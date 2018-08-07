@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import BoycottReasonForm from './BoycottForm';
 
 export class BoycottModal extends Component {
+    submit = values => {
+        //print the form values to console
+        console.log(values);
+    }
     render() {
         //Render nothing if the "show" prop is false
         if(!this.props.isActive) {
@@ -19,6 +24,7 @@ export class BoycottModal extends Component {
                         ></button>
                     </header>
                     <section className="modal-card-body">
+                        <BoycottReasonForm onSubmit={this.submit} />
                     </section>
                     <footer className="modal-card-foot">
                     </footer>
