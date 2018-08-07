@@ -20,9 +20,11 @@ class App extends Component {
         </header>
         <div className="App-intro">
           <div className="map-container">
+
               <GoogleMapsComponent
-                className="map" 
+                className="map"
               />
+
           </div>
         </div>
       </div>
