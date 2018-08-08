@@ -1,26 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BoycottReasonForm from './BoycottForm';
 
-export class BoycottModal extends Component {
-    submit = values => {
-        //print the form values to console
-        console.log(values);
-    }
-    render() {
-        //Render nothing if the "show" prop is false
-        if(!this.props.isActive) {
-          return null;
-        }
-
-        return (
-            <div className={this.props.isActive ? 'is-active modal' : 'modal'} >
+export default ({isActive, onModalToggle}) => (
+        isActive ?
+            <div className={isActive ? 'is-active modal' : 'modal'} >
                 <div className="modal-background"></div>
                 <div className="modal-card">
                     <header className="modal-card-head">
                         <button 
                             className="delete"
                             aria-label="close"
-                            onClick={this.props.onClose}
+                            onClick={() => onModalToggle(!isActive)}
                         ></button>
                     </header>
                     <section className="modal-card-body">
@@ -30,8 +20,6 @@ export class BoycottModal extends Component {
                     </footer>
                 </div>
             </div>
-        );
-      }
-}
-
-export default BoycottModal;
+        :
+        null
+    );

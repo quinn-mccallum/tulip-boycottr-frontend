@@ -6,41 +6,25 @@ import BoycottModal from "./BoycottModal";
 import logo from "../logo.svg";
 import "../App.css";
 import 'bulma/css/bulma.css'
+import { toggleModal } from '../actions/boycottModalActions'
+import { connect } from 'react-redux';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { 
-      isActive: false 
-    };
-
-    this.toggleModal = this.toggleModal.bind(this);
-  }
-
-  componentDidMount() {
-    // this is here as an example for how to connect to the backend
-    // it should be removed once development has started
-    // this.props.healthCheck();
-  }
-
-  toggleModal = () => {
-    this.setState({
-      isActive: !this.state.isActive
-    });
-  }
 
   render() {
+
+    const { modalIsActive, toggleModalAction } = this.props;
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to Boycottr</h1>
         </header>
-        <Button buttonText="Add Boycott" onClickHandler={this.toggleModal}/>
+        <Button buttonText="Add Boycott" onClickHandler={() => toggleModalAction(!modalIsActive)}/>
         <BoycottModal 
-          isActive={this.state.isActive}
-          onClose={this.toggleModal}
+          isActive={modalIsActive}
+          onModalToggle={toggleModalAction}
          />
         <div className="App-intro">
           <div className="map-container">
@@ -54,4 +38,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    modalIsActive: state.modal.isActive
+  }
+}
+
+const mapDispatchToProps = {
+  toggleModalAction: toggleModal
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
