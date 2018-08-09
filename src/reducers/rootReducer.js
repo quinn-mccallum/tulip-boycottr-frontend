@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux';
-//import { pokemonReducer } from './pokemon.reducer';
-
+import { boycottLocations } from './boycottReducer';
+import { googleMapsReducer } from './googleMapsReducer';
+import { reducer as formReducer } from 'redux-form';
+import { boycottModalReducer } from './boycottModalReducer';
 
 export const rootReducer = combineReducers({
-    //pokemon: pokemonReducer,
-  });
+    boycottLocations,
+    googleMaps: googleMapsReducer,
+    modal: boycottModalReducer,
+    form: formReducer
+});
