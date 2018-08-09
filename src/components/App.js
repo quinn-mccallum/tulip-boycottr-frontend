@@ -7,11 +7,10 @@ import { fetchNearbyPlaces } from '../actions/placesActions';
 
 import "../App.css";
 import 'bulma/css/bulma.css'
+import { toggleModal } from '../actions/boycottModalActions'
+import { connect } from 'react-redux';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
     this.state = {
       isActive: false
     };
@@ -29,15 +28,25 @@ class App extends Component {
   }
 
   render() {
+
+    // const { modalIsActive, toggleModalAction } = this.props;
+
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to Boycottr</h1>
         </header>
+
         <Button buttonText="Add Boycott" onClickHandler={this.toggleModal}/>
         <BoycottModal
           isActive={this.state.isActive}
           onClose={this.toggleModal}
+
+        {/* <Button buttonText="Add Boycott" onClickHandler={() => toggleModalAction(!modalIsActive)}/>
+        <BoycottModal
+          isActive={modalIsActive}
+          onModalToggle={toggleModalAction} */}
+
          />
         <div className="App-intro">
           <div className="map-container">
@@ -52,9 +61,23 @@ class App extends Component {
   }
 }
 
+
 const mapStateToProps = ({ googleMaps }) => {
     const { userLat, userLng } = googleMaps;
     return { userLat, userLng }
 }
 
 export default connect(mapStateToProps, { fetchNearbyPlaces })(App);
+
+// const mapStateToProps = (state) => {
+//   return {
+//     modalIsActive: state.modal.isActive
+//   }
+// }
+//
+// const mapDispatchToProps = {
+//   toggleModalAction: toggleModal
+// }
+//
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
