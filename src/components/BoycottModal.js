@@ -62,7 +62,7 @@ export class BoycottModal extends Component {
 }
 
 const mapStateToProps = ({ googleMaps, googlePlaces }) => {
-  const { userLat, userLng, isLoading } = googleMaps;
+  const { userLat, userLng } = googleMaps;
   const { placesLoading, error, nearbyPlaces, searchedPlaces } = googlePlaces;
   return { userLat, userLng, placesLoading, error, nearbyPlaces, searchedPlaces }
 }

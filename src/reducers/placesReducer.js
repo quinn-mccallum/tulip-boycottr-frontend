@@ -1,7 +1,7 @@
 import * as GOOGLE_PLACES_ACTIONS from '../actions/placesActions';
 
 export const INITIAL_GOOGLE_PLACES_STATE = {
-    placesLoading: true,
+    placesLoading: false,
     nearbyPlaces: [],
     searchedPlaces: [],
     error: '',
