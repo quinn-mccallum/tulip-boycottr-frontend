@@ -8,7 +8,7 @@ import { boycottModalReducer } from './boycottModalReducer';
 export const rootReducer = combineReducers({
     boycottLocations,
     googleMaps: googleMapsReducer,
-    googlePlaces: googlePlacesReducer
+    googlePlaces: googlePlacesReducer,
     modal: boycottModalReducer,
     form: formReducer
 });

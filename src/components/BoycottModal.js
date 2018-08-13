@@ -1,8 +1,19 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSearchedPlaces } from '../actions/placesActions';
+import { updateBoycotts } from '../actions/boycottActions';
+import { toggleModal } from '../actions/boycottModalActions';
 
-export class BoycottModal extends Component {
+//FORM
+// const submit = values => {
+//     console.log(this.props.updateBoycotts);
+//     //print the form values to console
+//     this.props.updateBoycotts(values);
+//     //create a post to send the form to the backend
+// }
+
+class BoycottModal extends Component {
 
   placesSearch = searchTerm => {
     this.props.fetchSearchedPlaces(searchTerm);
@@ -21,23 +32,19 @@ export class BoycottModal extends Component {
   }
 
   render() {
-      //Render nothing if the "show" prop is false
-    if(!this.props.isActive) {
-      return null;
-    }
-
     return (
+      this.props.isActive && (
         <div className={this.props.isActive ? 'is-active modal' : 'modal'} >
-            <div className="modal-background"></div>
+          <div className="modal-background"></div>
             <div className="modal-card">
-                <header className="modal-card-head">
-                    <button
-                        className="delete"
-                        aria-label="close"
-                        onClick={this.props.onClose}
-                    ></button>
-                    <h1>Add a new boycott</h1>
-                </header>
+              <header className="modal-card-head">
+                <button
+                  className="delete"
+                  aria-label="close"
+                  onClick={()=>{this.props.toggleModal(!this.props.isActive)}}
+                  />
+                  <h1>Add a new boycott</h1>
+              </header>
                 <section className="modal-card-body">
                   <div className='control'>
                     <input ref={ref => this.input = ref} className='input is-info is-large' type='text' placeholder='Search Nearby Places' />
@@ -53,18 +60,24 @@ export class BoycottModal extends Component {
                     </ul>
                   </div>
                 </section>
-                <footer className="modal-card-foot">
-                </footer>
             </div>
-        </div>
-    );
-  }
+          </div>
+)
+);
+}
 }
 
-const mapStateToProps = ({ googleMaps, googlePlaces }) => {
+
+const mapDispatchToProps = {
+      updateBoycotts,
+      fetchSearchedPlaces,
+      toggleModal
+}
+
+const mapStateToProps = ({ googleMaps, googlePlaces, boycottLocations }) => {
   const { userLat, userLng } = googleMaps;
   const { placesLoading, error, nearbyPlaces, searchedPlaces } = googlePlaces;
-  return { userLat, userLng, placesLoading, error, nearbyPlaces, searchedPlaces }
+  return { userLat, userLng, placesLoading, error, nearbyPlaces, searchedPlaces, markerData: boycottLocations }
 }
 
-export default connect(mapStateToProps, { fetchSearchedPlaces })(BoycottModal);
+export default connect(mapStateToProps, mapDispatchToProps)(BoycottModal);

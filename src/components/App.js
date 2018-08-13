@@ -4,32 +4,38 @@ import GoogleMapsComponent from "./MapContainer";
 import Button from "./Button";
 import BoycottModal from "./BoycottModal";
 import { fetchNearbyPlaces } from '../actions/placesActions';
-
+import { toggleModal } from '../actions/boycottModalActions'
 import "../App.css";
 import 'bulma/css/bulma.css'
-import { toggleModal } from '../actions/boycottModalActions'
-import { connect } from 'react-redux';
+
 
 class App extends Component {
-    this.state = {
-      isActive: false
-    };
+  // constructor(props){
+  //   super(props)
+  //
+  //   this.toggleModal = this.toggleModal.bind(this);
+  // }
 
-    this.toggleModal = this.toggleModal.bind(this);
-  }
 
-  toggleModal = () => {
-    if(!this.state.isActive){
-        this.props.fetchNearbyPlaces(this.props.userLat, this.props.userLng);
+  // toggleModal = () => {
+  //   if(!this.state.isActive){
+  //       this.props.fetchNearbyPlaces(this.props.userLat, this.props.userLng);
+  //   }
+  //   this.setState({
+  //     isActive: !this.state.isActive
+  //   });
+  // }
+
+  modalToggleHelper = () => {
+    if (this.props.userLat && this.props.userLng && !this.props.isLoading && this.props.nearbyPlaces.length === 0){
+      this.props.fetchNearbyPlaces(this.props.userLat, this.props.userLng)
     }
-    this.setState({
-      isActive: !this.state.isActive
-    });
+    this.props.toggleModalAction(!this.props.modalIsActive)
   }
 
   render() {
 
-    // const { modalIsActive, toggleModalAction } = this.props;
+    const { modalIsActive, toggleModalAction } = this.props;
 
     return (
       <div className="App">
@@ -37,15 +43,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to Boycottr</h1>
         </header>
 
-        <Button buttonText="Add Boycott" onClickHandler={this.toggleModal}/>
+        <Button buttonText="Add Boycott" onClickHandler={this.modalToggleHelper}/>
         <BoycottModal
-          isActive={this.state.isActive}
-          onClose={this.toggleModal}
-
-        {/* <Button buttonText="Add Boycott" onClickHandler={() => toggleModalAction(!modalIsActive)}/>
-        <BoycottModal
-          isActive={modalIsActive}
-          onModalToggle={toggleModalAction} */}
+          isActive={this.props.modalIsActive}
+          onClose={this.props.toggleModalAction}
 
          />
         <div className="App-intro">
@@ -61,23 +62,18 @@ class App extends Component {
   }
 }
 
+const mapDispatchToProps = {
+  toggleModalAction: toggleModal,
+  fetchNearbyPlaces
 
-const mapStateToProps = ({ googleMaps }) => {
-    const { userLat, userLng } = googleMaps;
-    return { userLat, userLng }
 }
 
-export default connect(mapStateToProps, { fetchNearbyPlaces })(App);
+const mapStateToProps = ({ googleMaps, googlePlaces, modal }) => {
+    const { userLat, userLng, isLoading } = googleMaps;
+    const { nearbyPlaces } = googlePlaces;
+    const { isActive } = modal;
+    return { userLat, userLng, modalIsActive: isActive, isLoading, nearbyPlaces }
+}
 
-// const mapStateToProps = (state) => {
-//   return {
-//     modalIsActive: state.modal.isActive
-//   }
-// }
-//
-// const mapDispatchToProps = {
-//   toggleModalAction: toggleModal
-// }
-//
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
