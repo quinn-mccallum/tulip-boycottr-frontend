@@ -2,14 +2,6 @@ import axios from 'axios';
 
 import { API_BASE_URL } from '../api/config'
 
-// export const POKEMON_ACTIONS = {
-//     SET_IS_LOADING: 'pokemon/SET_IS_LOADING',
-//     SET_POKEMON: 'pokemon/SET_POKEMON',
-//   };
-
-// axios.defaults.baseURL = 'https://api.example.com';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export const BOYCOTT_ACTIONS ={
     REQUEST_SUCCESS: "BOYCOTT_REQUEST_SUCCESS",

@@ -35,7 +35,7 @@ class App extends Component {
 
   render() {
 
-    const { modalIsActive, toggleModalAction } = this.props;
+    // const { modalIsActive, toggleModalAction } = this.props;
 
     return (
       <div className="App">
