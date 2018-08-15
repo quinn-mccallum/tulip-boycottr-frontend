@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 const BoycottReasonForm = props => {
-    const { handleSubmit } = props
+    const { handleSubmit, previousPage } = props
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -101,7 +101,8 @@ const BoycottReasonForm = props => {
                     </div>
                 </div>
                 <div className="control">
-                    <button className="button is-primary" type="submit">Submit</button>
+                    <button className="button is-primary is-outlined previous" type="primary" onClick={previousPage}>Previous</button>
+                    <button className="button is-primary submit" type="submit">Submit</button>
                 </div>
             </div>
         </form>
@@ -109,5 +110,9 @@ const BoycottReasonForm = props => {
 };
 
 export default reduxForm({
-    form: 'boycottReasonForm'
-})(BoycottReasonForm)
+    form: 'addBoycottForm',
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+ 
+  })(BoycottReasonForm)
+

@@ -1,23 +1,30 @@
 
 import React, { Component } from 'react';
+import AddBoycottWizardForm from './AddBoycottWizardForm';
 import { connect } from 'react-redux';
 import { fetchSearchedPlaces } from '../actions/placesActions';
 import { updateBoycotts } from '../actions/boycottActions';
 import { toggleModal } from '../actions/boycottModalActions';
 
-//FORM
-// const submit = values => {
-//     console.log(this.props.updateBoycotts);
-//     //print the form values to console
-//     this.props.updateBoycotts(values);
-//     //create a post to send the form to the backend
-// }
+
+
+
 
 class BoycottModal extends Component {
 
-  placesSearch = searchTerm => {
-    this.props.fetchSearchedPlaces(searchTerm);
-  };
+     submit = values => {
+        console.log(values);
+        //print the form values to console
+        //this.props.updateBoycotts(values);
+        
+        //create a post to send the form to the backend
+     };
+    
+      placesSearch = searchTerm => {
+        this.props.fetchSearchedPlaces(searchTerm);
+      };
+
+
 
   renderSearchedPlaces = () => {
     return this.props.searchedPlaces.map((place, i) => {
@@ -46,6 +53,9 @@ class BoycottModal extends Component {
                   <h1>Add a new boycott</h1>
               </header>
                 <section className="modal-card-body">
+
+                    <AddBoycottWizardForm onSubmit={this.submit} />
+
                   <div className='control'>
                     <input ref={ref => this.input = ref} className='input is-info is-large' type='text' placeholder='Search Nearby Places' />
                     <button onClick={()=>{this.placesSearch(this.input.value)}}>Search</button>
@@ -79,5 +89,6 @@ const mapStateToProps = ({ googleMaps, googlePlaces, boycottLocations }) => {
   const { placesLoading, error, nearbyPlaces, searchedPlaces } = googlePlaces;
   return { userLat, userLng, placesLoading, error, nearbyPlaces, searchedPlaces, markerData: boycottLocations }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoycottModal);
