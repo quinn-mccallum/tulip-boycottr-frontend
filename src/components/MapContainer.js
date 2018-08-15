@@ -52,7 +52,7 @@ export class GoogleMapsComponent extends Component {
    this.props.fetchUserLocation();
   }
 
-  
+
   render() {
     const { isLoading, userLat, userLng } = this.props;
     const style = {
@@ -66,7 +66,7 @@ export class GoogleMapsComponent extends Component {
     return (
        isLoading
         ? <p>Loading</p>
-        : <Map 
+        : <Map
         google = {this.props.google}
         zoom = {14}
         initialCenter = {
@@ -78,15 +78,17 @@ export class GoogleMapsComponent extends Component {
         style = {style}
       >
         {MarkerList({markerData: this.props.markerData})}
-      </Map> 
+      </Map>
     );
   }
 }
+
 
 const GoogleMapsContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(GoogleMapsComponent);
+
 
 export default GoogleApiWrapper({
   apiKey: REACT_APP_GOOGLE_MAPS_API_KEY

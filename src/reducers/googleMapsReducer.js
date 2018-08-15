@@ -3,7 +3,7 @@ import { GOOGLE_MAPS_ACTIONS } from '../actions/googleMapsActions';
 export const INITIAL_GOOGLE_MAPS_STATE = {
     userLat: null,
     userLng: null,
-    isLoading: true,
+    isLoading: false,
     error: '',
 };
 
