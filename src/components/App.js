@@ -10,21 +10,6 @@ import 'bulma/css/bulma.css'
 
 
 class App extends Component {
-  // constructor(props){
-  //   super(props)
-  //
-  //   this.toggleModal = this.toggleModal.bind(this);
-  // }
-
-
-  // toggleModal = () => {
-  //   if(!this.state.isActive){
-  //       this.props.fetchNearbyPlaces(this.props.userLat, this.props.userLng);
-  //   }
-  //   this.setState({
-  //     isActive: !this.state.isActive
-  //   });
-  // }
 
   modalToggleHelper = () => {
     if (this.props.userLat && this.props.userLng && !this.props.isLoading && this.props.nearbyPlaces.length === 0){
@@ -34,8 +19,6 @@ class App extends Component {
   }
 
   render() {
-
-    // const { modalIsActive, toggleModalAction } = this.props;
 
     return (
       <div className="App">
