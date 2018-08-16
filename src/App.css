@@ -9,13 +9,14 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  /* height: 17vh; */
   padding: 20px;
   color: white;
 }
 
 .App-title {
   font-size: 1.5em;
+  margin-bottom: 1rem;
 }
 
 .App-intro {
@@ -27,6 +28,23 @@
   to { transform: rotate(360deg); }
 }
 
-.map-container {
-  height: 65vh;
+.map-container > div > div {
+  position: static !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.center button {
+  margin: 0 5px;
+}
+
+.loading {
+  padding-top: 30px;
+}
+
+.loading a {
+  outline: none !important;
+  border: none !important;
 }

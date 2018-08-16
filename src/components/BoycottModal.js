@@ -22,7 +22,6 @@ class BoycottModal extends Component {
       };
 
 
-
   renderSearchedPlaces = () => {
     return this.props.searchedPlaces.map((place, i) => {
       return <a><li key={`${place.description}${i}`} >{`${place.description}`}</li></a>
@@ -42,12 +41,12 @@ class BoycottModal extends Component {
           <div className="modal-background"></div>
             <div className="modal-card">
               <header className="modal-card-head">
+              <h1 className="modal-card-title">Add a New Boycott</h1>
                 <button
                   className="delete"
                   aria-label="close"
                   onClick={()=>{this.props.toggleModal(!this.props.isActive)}}
                   />
-                  <h1>Add a new boycott</h1>
               </header>
                 <section className="modal-card-body">
 
