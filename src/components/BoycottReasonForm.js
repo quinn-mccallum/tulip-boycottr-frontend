@@ -100,7 +100,7 @@ const BoycottReasonForm = props => {
                         />
                     </div>
                 </div>
-                <div className="control">
+                <div className="control center">
                     <button className="button is-primary is-outlined previous" type="primary" onClick={previousPage}>Previous</button>
                     <button className="button is-primary submit" type="submit">Submit</button>
                 </div>

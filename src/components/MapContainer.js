@@ -56,16 +56,19 @@ export class GoogleMapsComponent extends Component {
   render() {
     const { isLoading, userLat, userLng } = this.props;
     const style = {
-      'width': '85%',
-      'margin': '0 auto',
+      'width': '95%',
+      'margin': '1rem auto',
       'display': 'block',
-      'height' : '65vh',
+      'height' : '79vh',
       'position': 'static'
     }
 
     return (
        isLoading
-        ? <p>Loading</p>
+        ? <div className="loading">
+            <a className="button is-loading is-large">Loading</a>
+            <p> Loading...</p>
+          </div>
         : <Map
         google = {this.props.google}
         zoom = {14}

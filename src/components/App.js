@@ -6,7 +6,8 @@ import BoycottModal from "./BoycottModal";
 import { fetchNearbyPlaces } from '../actions/placesActions';
 import { toggleModal } from '../actions/boycottModalActions'
 import "../App.css";
-import 'bulma/css/bulma.css'
+import 'bulma/css/bulma.css';
+import 'bulma';
 
 
 class App extends Component {
@@ -41,9 +42,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to Boycottr</h1>
+          <Button buttonText="Add Boycott" onClickHandler={this.modalToggleHelper}/>
         </header>
-
-        <Button buttonText="Add Boycott" onClickHandler={this.modalToggleHelper}/>
         <BoycottModal
           isActive={this.props.modalIsActive}
           onClose={this.props.toggleModalAction}

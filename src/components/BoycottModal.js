@@ -6,10 +6,6 @@ import { fetchSearchedPlaces } from '../actions/placesActions';
 import { updateBoycotts } from '../actions/boycottActions';
 import { toggleModal } from '../actions/boycottModalActions';
 
-
-
-
-
 class BoycottModal extends Component {
 
      submit = values => {
@@ -23,7 +19,6 @@ class BoycottModal extends Component {
       placesSearch = searchTerm => {
         this.props.fetchSearchedPlaces(searchTerm);
       };
-
 
 
   renderSearchedPlaces = () => {
@@ -45,12 +40,12 @@ class BoycottModal extends Component {
           <div className="modal-background"></div>
             <div className="modal-card">
               <header className="modal-card-head">
+              <h1 className="modal-card-title">Add a New Boycott</h1>
                 <button
                   className="delete"
                   aria-label="close"
                   onClick={()=>{this.props.toggleModal(!this.props.isActive)}}
-                  />
-                  <h1>Add a new boycott</h1>
+                  /> 
               </header>
                 <section className="modal-card-body">
 
