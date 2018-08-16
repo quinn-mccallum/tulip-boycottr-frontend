@@ -5,35 +5,14 @@ import BoycottReasonForm from './BoycottReasonForm'
 
 
 class AddBoycottWizardForm extends Component {
-  constructor(props) {
-    super(props)
-    this.nextPage = this.nextPage.bind(this)
-    this.previousPage = this.previousPage.bind(this)
-    this.state = {
-      page: 1
-    }
-  }
-  nextPage() {
-    this.setState({ page: this.state.page + 1 })
-  }
-
-  previousPage() {
-    this.setState({ page: this.state.page - 1 })
-  }
-
   render() {
-    const { onSubmit } = this.props
-    const { page } = this.state
+    const { onSubmit, previousPage } = this.props
     return (
       <div>
-        {page === 1 && <AddBoycottSearchPlace onSubmit={this.nextPage} />}
-   
-        {page === 2 && (
           <BoycottReasonForm
-            previousPage={this.previousPage}
+            previousPage={previousPage}
             onSubmit={onSubmit}
           />
-        )}
       </div>
     )
   }

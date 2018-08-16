@@ -113,6 +113,5 @@ export default reduxForm({
     form: 'addBoycottForm',
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
- 
-  })(BoycottReasonForm)
 
+  })(BoycottReasonForm)

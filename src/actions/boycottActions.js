@@ -22,13 +22,31 @@ export const loadBoycotts = (dispatch) => {
    .catch( err => console.log(err));
 }
 
+export const createBoycott = (values, address, lat, lng, name) => dispatch => {
+  axios.post(`${API_BASE_URL}/boycotts/boycottLocation`, {
+          reasons: values,
+          lat,
+          lng,
+          name,
+          address
+        })
+       .then(res => {
+         console.log(res);
+         // dispatch({
+         //   type: BOYCOTT_ACTIONS.REQUEST_SUCCESS,
+         //   payload: res.data
+         // })
+       })
+       .catch(err => {
+         console.log(err);
+       })
+}
+
 export const updateBoycotts = (values) => (dispatch) => {
   //update all boycott data from form input
   axios.post(`${API_BASE_URL}/boycotts/updateBoycotts`,{
     data: values
   })
-   .then(res => res.json())
-   .then(res => console.log(res))
    .then(data => {
      dispatch({
        type: BOYCOTT_ACTIONS.REQUEST_SUCCESS,

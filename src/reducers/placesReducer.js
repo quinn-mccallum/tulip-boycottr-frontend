@@ -5,6 +5,8 @@ export const INITIAL_GOOGLE_PLACES_STATE = {
     nearbyPlaces: [],
     searchedPlaces: [],
     error: '',
+    establishmentInformation: {name : null},
+    loadingInformation: false
 };
 
 export const googlePlacesReducer = (state = INITIAL_GOOGLE_PLACES_STATE, action = {}) => {
@@ -47,6 +49,33 @@ export const googlePlacesReducer = (state = INITIAL_GOOGLE_PLACES_STATE, action 
             ...state,
             placesLoading: false,
             error: action.payload,
+          }
+        }
+        case GOOGLE_PLACES_ACTIONS.FETCH_ESTABLISHMENT_INFORMATION: {
+          return {
+            ...state,
+            loadingInformation: true
+          }
+        }
+        case GOOGLE_PLACES_ACTIONS.FETCH_ESTABLISHMENT_INFORMATION_SUCCESS: {
+          return {
+            ...state,
+            loadingInformation: false,
+            establishmentInformation: action.payload
+          }
+        }
+        case GOOGLE_PLACES_ACTIONS.FETCH_ESTABLISHMENT_INFORMATION_ERROR: {
+          return {
+            ...state,
+            loadingInformation: false,
+            establishmentInformation: {name: null},
+            error: action.payload
+          }
+        }
+        case GOOGLE_PLACES_ACTIONS.CLEAR_STORE_ESTABLISHMENT: {
+          return {
+            ...state,
+            establishmentInformation: {name : null}
           }
         }
         default: {

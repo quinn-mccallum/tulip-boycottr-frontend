@@ -13,6 +13,11 @@ export const FETCH_SEARCHED_PLACES = 'FETCH_SEARCHED_PLACES';
 export const SET_SEARCHED_PLACES = 'SET_SEARCHED_PLACES';
 export const FETCH_SEARCHED_PLACES_ERROR = 'FETCH_SEARCHED_PLACES_ERROR';
 
+export const FETCH_ESTABLISHMENT_INFORMATION = 'FETCH_ESTABLISHMENT_INFORMATION';
+export const FETCH_ESTABLISHMENT_INFORMATION_SUCCESS = 'FETCH_ESTABLISHMENT_INFORMATION_SUCCESS';
+export const FETCH_ESTABLISHMENT_INFORMATION_ERROR = 'FETCH_ESTABLISHMENT_INFORMATION_ERROR';
+
+export const CLEAR_STORE_ESTABLISHMENT = 'CLEAR_STORE_ESTABLISHMENT';
 /*
   Action Creators
 */
@@ -42,6 +47,27 @@ export const fetchNearbyPlaces = (lat, lng) => {
       return null
     }
   }
+}
+
+export const getEstablishmentInformation = placeId => dispatch => {
+  dispatch({type: FETCH_ESTABLISHMENT_INFORMATION});
+  axios.get(`http://localhost:8081/boycotts/establishmentInfo/${placeId}`)
+       .then(res=>{
+         dispatch({
+           type: FETCH_ESTABLISHMENT_INFORMATION_SUCCESS,
+           payload: res.data
+         })
+       })
+       .catch(err=>{
+         dispatch({
+           type: FETCH_ESTABLISHMENT_INFORMATION_ERROR,
+           payload: err
+         })
+       })
+}
+
+export const clearStoreEstablishment = () => dispatch => {
+  dispatch({type: CLEAR_STORE_ESTABLISHMENT});
 }
 
 export const fetchSearchedPlaces = searchTerm => {
