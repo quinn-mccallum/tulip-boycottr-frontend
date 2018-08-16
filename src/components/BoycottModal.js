@@ -7,19 +7,16 @@ import { updateBoycotts } from '../actions/boycottActions';
 import { toggleModal } from '../actions/boycottModalActions';
 
 
-
-
-
 class BoycottModal extends Component {
 
      submit = values => {
         console.log(values);
         //print the form values to console
         //this.props.updateBoycotts(values);
-        
+
         //create a post to send the form to the backend
      };
-    
+
       placesSearch = searchTerm => {
         this.props.fetchSearchedPlaces(searchTerm);
       };
@@ -28,13 +25,13 @@ class BoycottModal extends Component {
 
   renderSearchedPlaces = () => {
     return this.props.searchedPlaces.map((place, i) => {
-      return <li key={`${place.description}${i}`} >{`${place.description}`}</li>
+      return <a><li key={`${place.description}${i}`} >{`${place.description}`}</li></a>
     })
   }
 
   renderPlaces = () => {
     return this.props.nearbyPlaces.map((place, i)=> {
-      return <li key={`${place.name}${i}`}>{`${place.name}, ${place.address}`}</li>
+      return <a><li style={{paddingTop: '0.5rem'}} key={`${place.name}${i}`}>{`${place.name}, ${place.address}`}</li></a>
     })
   }
 
@@ -60,11 +57,12 @@ class BoycottModal extends Component {
                     <input ref={ref => this.input = ref} className='input is-info is-large' type='text' placeholder='Search Nearby Places' />
                     <button onClick={()=>{this.placesSearch(this.input.value)}}>Search</button>
                   </div>
-                  <ul>
-                    { this.props.isLoading ? <p>loading</p> : this.renderSearchedPlaces() }
-                  </ul>
-                  <div>
-                    <h1>Nearby Places: </h1>
+                    <h1 style={{fontSize: '1.5rem'}}>Results:</h1>
+                    <ul>
+                      { this.props.isLoading ? <p>loading</p> : this.renderSearchedPlaces() }
+                    </ul>
+                  <div style={{border: 'solid thin black', padding: '1.5rem', margin: '2rem'}}>
+                    <h1 style={{fontSize: '1.5rem'}}>Nearby Places: </h1>
                     <ul>
                       { this.props.isLoading ? <p>Loading</p> : this.renderPlaces() }
                     </ul>
